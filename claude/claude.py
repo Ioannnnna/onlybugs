@@ -44,7 +44,7 @@ def invoke(messages, tool_results=None, max_tokens=400, temperature=0.3):
         "messages": messages,
         "tools": TOOLS,
         "max_tokens": max_tokens,
-        "temperature": temperature,
+        "temperature": 0.7,
     }
     if tool_results:
         body["tool_results"] = tool_results
@@ -64,18 +64,14 @@ while True:
         if q.lower() in {"quit", "exit"}:
             break
 
-        try:
-            t = float(input("temperature 0-1 [0.3]: ") or "0.3")
-        except ValueError:
-            t = 0.3
-
+        
         # ── build user message list ───────────────────────────────
         messages = [{
             "role": "user",
             "content": [{"type": "text", "text": q}]
         }]
 
-        first = invoke(messages, temperature=t)
+        first = invoke(messages, temperature=0.7)
 
         # look for tool_use element
         tool_elem = next(
@@ -109,7 +105,7 @@ while True:
             follow = invoke(
                 messages + [assistant_msg],
                 tool_results=tool_results,
-                temperature=t
+                temperature=0.7
             )
 
             answer = follow["content"][0]["text"]
