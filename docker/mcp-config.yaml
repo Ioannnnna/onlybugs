@@ -1,0 +1,12 @@
+servers:
+  - name: postgres-server
+    port: 8000
+    connectors:
+      - type: postgresql
+        name: local_pg
+        config:
+          host: host.docker.internal
+          port: 5432
+          database: mydb
+          user: postgres
+          password: password123
