@@ -127,3 +127,4 @@ while True:
         # show any error and continue the loop
         print("\n⚠️  Error:", exc)
 print("\nClaude:", answer)
+#######
